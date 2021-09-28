@@ -1,30 +1,28 @@
 #include <Arduino.h>
+//#include <string.h>
 #include "esp_https_server.h"
 #include "static.hpp"
 #include "pins.hpp"
 //states
 
-
 static esp_err_t onled(httpd_req_t *req)
 {
-    String uri=String(req->uri);
-    
-   
-    static bool  yellowState = LOW;
-    static bool  greenState = LOW;
-    static bool  redState = LOW;
-    if (uri== String("/led?green")){// /led?green
-        
-        greenState = !greenState;
-        }
-    else if (uri==String("/led?red"))
-        redState = !redState;
-    else if (uri ==String("/led?yellow"))
-        yellowState = !yellowState;
-    
-    
+    const char *uri =req->uri;
 
-    
+    static bool yellowState = LOW;
+    static bool greenState = LOW;
+    static bool redState = LOW;
+
+    if (!strcmp(uri, "/led?green"))
+
+        greenState = !greenState;
+
+    else if (!strcmp(uri, "/led?red"))
+        redState = !redState;
+
+    else if (!strcmp(uri, "/led?yellow"))
+        yellowState = !yellowState;
+
     Serial.printf("%d,%d,%d\n", yellowState, greenState, redState);
     digitalWrite(GREEN, greenState);
     digitalWrite(YELLOW, yellowState);
