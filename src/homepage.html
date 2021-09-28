@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>por fin carajo</title>
+</head>
+<body>
+    <div id="content">
+    <h1 id="title">select button</h1>
+    <button id="red" class="led-color">red</button>
+    <button id="green" class="led-color">green</button>
+    <button id="yellow" class="led-color">yellow</button>
+    <script>
+        const leds=document.getElementsByClassName('led-color');
+        for(let i=0;i<leds.length;i++){
+            let led=leds[i]
+            led.addEventListener('click',function(){
+                const color=this.id;
+                fetch('/led?'+color);
+            })
+            led.style.backgroundColor=led.id;
+            
+        } 
+
+        </script>
+    <div>
+
+    
+</body>
+
+<style>
+    body{
+        background-color:black;
+        color:#DDD;
+        font-family: sans-serif;
+    }
+    #title{
+        text-align:center;
+        font-size:4em;
+    }
+    #content{
+        text-align: center;
+    }
+    .led-color{
+        width:100px;
+        height:100px;
+        border-radius:50%;
+        background-color:black;
+        color:#DDD;
+        font-size:2em;
+        border:none;
+       
+       
+    }
+
+</style>
+</html>
